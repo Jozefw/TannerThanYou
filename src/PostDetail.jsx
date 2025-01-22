@@ -2,7 +2,7 @@ import { fetchComments } from "./api";
 import { useQuery } from "@tanstack/react-query";
 import "./PostDetail.css";
 
-export function PostDetail({ post }) {
+export function PostDetail({ post, deletePost }) {
   // replace with useQuery
   const {data, isError, isLoading} = useQuery({
     queryKey:["comments",post.id],
@@ -22,7 +22,7 @@ return(<h3>Something is wrong. Error:</h3>)}
   return (
     <>
       <h3 style={{ color: "blue" }}>{post.title}</h3>
-      <button>Delete</button> <button>Update title</button>
+      <button onClick={()=>deletePost(post.id)}>Delete</button> <button>Update title</button>
       <p>{post.body}</p>
       <h4>Comments</h4>
       {data.map((comment) => (
